@@ -6,7 +6,7 @@ import retrofit2.http.Path;
 
 public interface FruityService {
 
-    @GET("api/fruit/name")
+    @GET("api/fruit/{name}")
     Single<Fruit> getFruit(@Path("name")String name);
 
 }
