@@ -14,24 +14,23 @@ public class FruitFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         setLayout(new GridBagLayout());
-        GridBagConstraints constraints;
 
         JTextField searchField = new JTextField();
 
         JButton searchButton = new JButton("Search");
 
-        JLabel pictureLabel = new JLabel(" ", SwingConstants.CENTER);
+        JLabel pictureLabel = new JLabel("Pic", SwingConstants.CENTER);
         pictureLabel.setBorder(new LineBorder(Color.BLACK));
         pictureLabel.setPreferredSize(new Dimension(200, 300));
 
-        JLabel familyTitleLabel = new JLabel("Family");
-        JLabel orderTitleLabel = new JLabel("Order");
-        JLabel genusTitleLabel = new JLabel("Genus");
-        JLabel caloriesTitleLabel = new JLabel("Calories");
-        JLabel fatTitleLabel = new JLabel("Fat");
-        JLabel sugarTitleLabel = new JLabel("Sugar");
-        JLabel carbsTitleLabel = new JLabel("Carbs");
-        JLabel proteinTitleLabel = new JLabel("Proteins");
+        final JLabel familyTitleLabel = new JLabel("Family");
+        final JLabel orderTitleLabel = new JLabel("Order");
+        final JLabel genusTitleLabel = new JLabel("Genus");
+        final JLabel caloriesTitleLabel = new JLabel("Calories");
+        final JLabel fatTitleLabel = new JLabel("Fat");
+        final JLabel sugarTitleLabel = new JLabel("Sugar");
+        final JLabel carbsTitleLabel = new JLabel("Carbs");
+        final JLabel proteinTitleLabel = new JLabel("Proteins");
 
         JLabel familyValueLabel = new JLabel("");
         JLabel orderValueLabel = new JLabel("");
@@ -62,6 +61,8 @@ public class FruitFrame extends JFrame {
                 fruitController.searchFruit();
             }
         });
+        GridBagConstraints constraints;
+
 
         // row 0 search field
         constraints = new GridBagConstraints();
