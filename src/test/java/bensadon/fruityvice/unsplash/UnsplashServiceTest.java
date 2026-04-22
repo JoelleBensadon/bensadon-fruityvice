@@ -1,5 +1,6 @@
 package bensadon.fruityvice.unsplash;
 
+import com.andrewoid.apikeys.ApiKey;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -12,12 +13,16 @@ class UnsplashServiceTest {
     void photosStructure() {
 
         // Given
+        ApiKey apiKey = new ApiKey();
+        String keyString = apiKey.get();
         UnsplashService service = new UnsplashServiceFactory().create();
 
 
         // When
-
-        Photos photos = service.search("strawberry").blockingGet();
+        Photos photos = service.search(
+                keyString,
+                "strawberry"
+        ).blockingGet();
         // Then
         assertNotNull(photos.results.get(0).urls.small);    }
 }
