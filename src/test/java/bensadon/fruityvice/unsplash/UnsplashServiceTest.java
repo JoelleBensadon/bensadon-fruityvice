@@ -12,19 +12,12 @@ class UnsplashServiceTest {
     void photosStructure() {
 
         // Given
-        Urls urls = new Urls();
-        urls.small = "test-url";
+        UnsplashService service = new UnsplashServiceFactory().create();
 
-        Result result = new Result();
-        result.urls = urls;
-
-        Photos photos = new Photos();
-        photos.results = List.of(result);
 
         // When
-        String imageUrl = photos.results.get(0).urls.small;
 
+        Photos photos = service.search("strawberry").blockingGet();
         // Then
-        assertEquals("test-url", imageUrl);
-    }
+        assertNotNull(photos.results.get(0).urls.small);    }
 }
