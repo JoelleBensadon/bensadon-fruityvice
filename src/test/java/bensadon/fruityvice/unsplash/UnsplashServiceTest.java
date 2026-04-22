@@ -24,5 +24,6 @@ class UnsplashServiceTest {
                 "strawberry"
         ).blockingGet();
         // Then
-        assertNotNull(photos.results.get(0).urls.small);    }
+        assertNotNull(photos.results.get(0).urls.small);
+    }
 }
