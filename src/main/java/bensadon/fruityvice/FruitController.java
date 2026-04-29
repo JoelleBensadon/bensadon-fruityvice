@@ -85,7 +85,6 @@ public class FruitController {
             String imageUrl = photos.results.get(0).urls.small;
             ImageIcon imageIcon = new ImageIcon(new URL(imageUrl));
             imageLabel.setIcon(imageIcon);
-            imageLabel.setText("");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
