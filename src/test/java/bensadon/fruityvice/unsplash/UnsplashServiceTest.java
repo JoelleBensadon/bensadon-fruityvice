@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UnsplashServiceTest {
 
     @Test
-    void search() {
+    void photosStructure() {
 
         // Given
         ApiKey apiKey = new ApiKey();
