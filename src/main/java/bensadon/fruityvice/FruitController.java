@@ -1,11 +1,17 @@
 package bensadon.fruityvice;
 
+import bensadon.fruityvice.unsplash.Photos;
+import bensadon.fruityvice.unsplash.UnsplashService;
+import bensadon.fruityvice.unsplash.UnsplashServiceFactory;
+import com.andrewoid.apikeys.ApiKey;
+
 import javax.swing.*;
 import java.net.URL;
 import java.net.MalformedURLException;
 
 public class FruitController {
     private final FruityService fruityService;
+    private final UnsplashService unsplashService;
     private final JTextField searchField;
     private final JLabel familyValueLabel;
     private final JLabel orderValueLabel;
@@ -29,6 +35,7 @@ public class FruitController {
                            JLabel proteinValueLabel,
                            JLabel imageLabel) {
         this.fruityService = fruityService;
+        this.unsplashService = new UnsplashServiceFactory().create();
         this.searchField = searchField;
         this.familyValueLabel = familyValueLabel;
         this.orderValueLabel = orderValueLabel;
@@ -49,6 +56,15 @@ public class FruitController {
                         fruit -> handleResponse(fruit),
                         Throwable::printStackTrace
                 );
+
+        ApiKey apiKey = new ApiKey();
+        unsplashService.search(apiKey.get(), searchField.getText())
+                .subscribeOn(io.reactivex.rxjava3.schedulers.Schedulers.io())
+                .observeOn(io.reactivex.rxjava3.schedulers.Schedulers.from(SwingUtilities::invokeLater))
+                .subscribe(
+                        photos -> handleImageResponse(photos),
+                        Throwable::printStackTrace
+                );
     }
 
     private void handleResponse(Fruit fruit) {
@@ -62,13 +78,16 @@ public class FruitController {
         sugarValueLabel.setText(String.valueOf(nutritions.sugar()));
         carbsValueLabel.setText(String.valueOf(nutritions.carbohydrates()));
         proteinValueLabel.setText(String.valueOf(nutritions.protein()));
+    }
 
+    private void handleImageResponse(Photos photos) {
         try {
-            ImageIcon imageIcon = new ImageIcon(new URL("https://picsum.photos/800/600"));
+            String imageUrl = photos.results.get(0).urls.small;
+            ImageIcon imageIcon = new ImageIcon(new URL(imageUrl));
             imageLabel.setIcon(imageIcon);
+            imageLabel.setText("");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-
     }
 }
