@@ -3,14 +3,13 @@ package bensadon.fruityvice.unsplash;
 import com.andrewoid.apikeys.ApiKey;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class UnsplashServiceTest {
 
     @Test
-    void photosStructure() {
+    void search() {
 
         // Given
         ApiKey apiKey = new ApiKey();
